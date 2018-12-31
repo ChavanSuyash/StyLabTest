@@ -1,8 +1,7 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 28
@@ -20,6 +19,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -29,4 +31,22 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+
+    //google auth
+    implementation 'com.google.android.gms:play-services-auth:16.0.1'
+
+    //dagger2
+    implementation "com.google.dagger:dagger:$rootProject.dagger2_version"
+    kapt "com.google.dagger:dagger-compiler:$rootProject.dagger2_version"
+
+    //ktx
+    implementation "androidx.core:core-ktx:$rootProject.ktx_version"
+
+    //ViewModel and LiveData
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycle_version"
+    kapt "androidx.lifecycle:lifecycle-compiler:$rootProject.lifecycle_version"
+
+    //ui
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraint_layout_version"
+    implementation "com.google.android.material:material:$rootProject.material_design_version"
 }

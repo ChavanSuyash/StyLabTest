@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Stylab</string>
+    <string name="login_activity_label">Login</string>
+
+    <string name="login_text">Log in</string>
+    <string name="login_successful">Login successful</string>
+    <string name="login_failed">Login failed</string>
 </resources>

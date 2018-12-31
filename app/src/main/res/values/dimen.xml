@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- standard metrics -->
+    <dimen name="spacing_large">32dp</dimen>
+    <dimen name="spacing_xlarge">48dp</dimen>
+    <dimen name="spacing_huge">64dp</dimen>
+    <dimen name="padding_normal">16dp</dimen>
+    <dimen name="padding_large">24dp</dimen>
+    <dimen name="dialog_corners">2dp</dimen>
+
+    <!-- Frame margin -->
+    <dimen name="margin_frame">80dp</dimen>
+
+    <!-- dialogs -->
+    <dimen name="padding_dialog">24dp</dimen>
+    <dimen name="dialog_title_spacing">20dp</dimen>
+
+    <!-- Z-axis elivation -->
+    <dimen name="z_fab">6dp</dimen>
+
+    <!--text size -->
+    <dimen name="size_feature_title">26sp</dimen>
+
+</resources>
