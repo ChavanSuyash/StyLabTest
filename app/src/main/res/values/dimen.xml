@@ -17,6 +17,7 @@
     <dimen name="dialog_title_spacing">20dp</dimen>
 
     <!-- Z-axis elivation -->
+    <dimen name="z_app_bar">4dp</dimen>
     <dimen name="z_fab">6dp</dimen>
 
     <!--text size -->

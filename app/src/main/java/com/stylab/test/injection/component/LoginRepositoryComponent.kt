@@ -1,12 +1,9 @@
 package com.stylab.test.injection.component
 
 import com.stylab.test.base.BaseActivityNavigator
-import com.stylab.test.features.login.LoginActivity
-import com.stylab.test.injection.module.GoogleSignInClientModule
 import com.stylab.test.injection.module.LoginRepositoryModule
 import com.stylab.test.injection.module.SharedPreferencesModule
 import dagger.Component
-import dagger.Subcomponent
 
 @Component(
     modules = [

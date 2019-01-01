@@ -7,7 +7,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.stylab.test"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -46,7 +46,27 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycle_version"
     kapt "androidx.lifecycle:lifecycle-compiler:$rootProject.lifecycle_version"
 
+    //coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutine_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutine_version"
+
+    //okhttp
+    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttp_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp_version"
+    implementation "com.github.bumptech.glide:glide:$rootProject.glide_version"
+
+    //Retrofit 2
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofit_version"
+    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2'
+    implementation "com.squareup.retrofit2:converter-moshi:$rootProject.retrofit_version"
+
+    //Glide
+    implementation "com.github.bumptech.glide:glide:$rootProject.glide_version"
+    kapt "com.github.bumptech.glide:compiler:$rootProject.glide_version"
+
     //ui
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraint_layout_version"
     implementation "com.google.android.material:material:$rootProject.material_design_version"
+
+    implementation 'com.google.code.findbugs:jsr305:3.0.2'
 }

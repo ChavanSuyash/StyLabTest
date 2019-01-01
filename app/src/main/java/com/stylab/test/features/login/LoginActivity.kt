@@ -12,24 +12,22 @@ import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
 import com.stylab.test.R
 import com.stylab.test.databinding.ActivityLoginBinding
+import com.stylab.test.features.home.HomeActivity
 import com.stylab.test.util.ActivityNavigation
+import com.stylab.test.util.startActivity
 import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity(), ActivityNavigation {
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
     private lateinit var binding : ActivityLoginBinding
-    private lateinit var viewModel: LoginViewModel
+
+    @Inject
+    lateinit var viewModel: LoginViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
 
         inject()
-
-        viewModel = ViewModelProviders.of(this, viewModelFactory)[LoginViewModel::class.java]
 
         binding = DataBindingUtil.setContentView(this,R.layout.activity_login)
         binding.loginViewModel = viewModel
@@ -52,10 +50,6 @@ class LoginActivity : AppCompatActivity(), ActivityNavigation {
                 }
             }
         )
-
-        binding.loginButton.setOnClickListener{
-            viewModel.googleSignUp()
-        }
     }
 
     public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -64,7 +58,8 @@ class LoginActivity : AppCompatActivity(), ActivityNavigation {
     }
 
     private fun showLoginSuccess(@StringRes successString : Int){
-
+        startActivity<HomeActivity>()
+        finish()
     }
 
     private fun showLoginFailed(@StringRes errorString : Int) {

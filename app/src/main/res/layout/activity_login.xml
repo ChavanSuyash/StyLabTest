@@ -37,7 +37,8 @@
                     android:layout_height="50dp"
                     android:elevation="@dimen/z_fab"
                     android:src="@drawable/google_sign_in_button"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:onClick="@{()->loginViewModel.googleSignUp()}"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

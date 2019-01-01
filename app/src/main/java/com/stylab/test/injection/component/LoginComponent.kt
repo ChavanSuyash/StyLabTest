@@ -1,10 +1,8 @@
 package com.stylab.test.injection.component
 
 import com.stylab.test.features.login.LoginActivity
-import com.stylab.test.injection.module.GoogleSignInClientModule
-import com.stylab.test.injection.module.LoginRepositoryModule
-import com.stylab.test.injection.module.SharedPreferencesModule
-import com.stylab.test.injection.module.ViewModelModule
+import com.stylab.test.injection.module.*
+import com.stylab.test.injection.scope.ActivityScope
 import dagger.Component
 import javax.inject.Singleton
 
@@ -12,10 +10,10 @@ import javax.inject.Singleton
     modules = [
         LoginRepositoryModule::class,
         GoogleSignInClientModule::class,
-        ViewModelModule::class
+        LoginViewModelModule::class
     ]
 )
-@Singleton
+@ActivityScope
 interface LoginComponent {
    @Component.Builder interface Builder {
 

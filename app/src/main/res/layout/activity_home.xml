@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+                name="viewModel"
+                type="com.stylab.test.features.home.HomeViewModel"/>
+    </data>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?android:actionBarSize"
+                android:background="@color/white"
+                android:elevation="@dimen/z_app_bar"
+                android:titleTextAppearance="@style/TextAppearance.ToolbarTitle"
+                android:title="@{`Hello, ` + viewModel.user.fullName}"/>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/homeList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:elevation="1dp"
+                android:scrollbarStyle="outsideOverlay"
+                android:scrollbars="vertical"
+                tools:listitem="@layout/grid_list_item"/>
+
+    </LinearLayout>
+
+</layout>

@@ -1,15 +1,19 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="StyLab" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="windowNoTitle">true</item>
+    <style name="TextAppearance" />
+    <style name="TextAppearance.ToolbarTitle" parent="@android:style/TextAppearance.Material.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFeatureSettings">smcp</item>
+        <item name="android:letterSpacing">0.05</item>
     </style>
+
 
 </resources>
