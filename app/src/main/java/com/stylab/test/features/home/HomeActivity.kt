@@ -1,7 +1,6 @@
 package com.stylab.test.features.home
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.stylab.test.R
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.animation.AnimationUtils
 import com.google.android.material.snackbar.Snackbar
 import com.stylab.test.util.action
-import com.stylab.test.util.animator.SlideInAnimator
 import com.stylab.test.util.animator.SpacesItemDecoration
 import com.stylab.test.util.snack
 import javax.inject.Inject
@@ -46,7 +44,6 @@ class HomeActivity : AppCompatActivity() {
         binding.homeList.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
         binding.homeList.adapter = listAdapter
         binding.homeList.addItemDecoration(SpacesItemDecoration(16))
-        binding.homeList.itemAnimator = SlideInAnimator()
 
         subScribeUi()
     }
