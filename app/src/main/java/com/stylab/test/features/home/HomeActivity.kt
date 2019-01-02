@@ -8,6 +8,7 @@ import com.stylab.test.databinding.ActivityHomeBinding
 import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.animation.AnimationUtils
 import com.google.android.material.snackbar.Snackbar
@@ -15,6 +16,9 @@ import com.stylab.test.util.action
 import com.stylab.test.util.animator.SpacesItemDecoration
 import com.stylab.test.util.snack
 import javax.inject.Inject
+import androidx.recyclerview.widget.SimpleItemAnimator
+
+
 
 
 class HomeActivity : AppCompatActivity() {
@@ -41,9 +45,9 @@ class HomeActivity : AppCompatActivity() {
         }
 
         listAdapter = HomeListAdapter(this)
-        binding.homeList.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
+        binding.homeList.layoutManager = GridLayoutManager(this, 2)
         binding.homeList.adapter = listAdapter
-        binding.homeList.addItemDecoration(SpacesItemDecoration(16))
+        binding.homeList.addItemDecoration(SpacesItemDecoration(14))
 
         subScribeUi()
     }

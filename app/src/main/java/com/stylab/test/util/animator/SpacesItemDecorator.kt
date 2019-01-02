@@ -1,19 +1,25 @@
 package com.stylab.test.util.animator
 
+import android.content.Context
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import androidx.annotation.DimenRes
 
 
-class SpacesItemDecoration(private val mSpace: Int) : RecyclerView.ItemDecoration() {
+class SpacesItemDecoration(private val mItemOffset: Int) : RecyclerView.ItemDecoration() {
 
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-        outRect.left = mSpace
-        outRect.right = mSpace
-        outRect.bottom = mSpace
+    constructor(context: Context, @DimenRes itemOffsetId: Int) : this(
+        context.getResources().getDimensionPixelSize(
+            itemOffsetId
+        )
+    )
 
-        // Add top margin only for the first item to avoid double space between items
-        if (parent.getChildAdapterPosition(view) == 1)
-            outRect.top = mSpace
+    override fun getItemOffsets(
+        outRect: Rect, view: View, parent: RecyclerView,
+        state: RecyclerView.State
+    ) {
+        super.getItemOffsets(outRect, view, parent, state)
+        outRect.set(mItemOffset, mItemOffset, mItemOffset, mItemOffset)
     }
 }

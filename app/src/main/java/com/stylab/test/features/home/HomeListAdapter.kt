@@ -11,10 +11,10 @@ import com.stylab.test.databinding.GridListItemBinding
 
 class HomeListAdapter(private val context: Context) : RecyclerView.Adapter<HomeListAdapter.ViewHolder>() {
 
-     /**
+    /**
      * The list of model for the adapter
      */
-    private var modelList: List<ListModel> = listOf()
+    private var modelList: List<ListModel> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeListAdapter.ViewHolder {
         val layoutInflater = LayoutInflater.from(context)
@@ -32,11 +32,11 @@ class HomeListAdapter(private val context: Context) : RecyclerView.Adapter<HomeL
 
     /**
      * Updates the list of git repository of the adapter
-     * @param modelList the new list of git repository of the adapter
+     * @param modelList the new list for adapter
      */
     fun updateList(modelList: List<ListModel>) {
         this.modelList = modelList
-        notifyDataSetChanged()
+        notifyItemRangeChanged(0, modelList.size)
     }
 
     /**
@@ -52,5 +52,4 @@ class HomeListAdapter(private val context: Context) : RecyclerView.Adapter<HomeL
             }
         }
     }
-
 }
