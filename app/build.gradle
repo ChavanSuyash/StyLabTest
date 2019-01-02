@@ -39,6 +39,9 @@ dependencies {
     implementation "com.google.dagger:dagger:$rootProject.dagger2_version"
     kapt "com.google.dagger:dagger-compiler:$rootProject.dagger2_version"
 
+    implementation "com.google.dagger:dagger-android-support:$project.dagger2_version"
+    kapt "com.google.dagger:dagger-android-processor:$project.dagger2_version"
+
     //ktx
     implementation "androidx.core:core-ktx:$rootProject.ktx_version"
 
@@ -62,6 +65,7 @@ dependencies {
 
     //Glide
     implementation "com.github.bumptech.glide:glide:$rootProject.glide_version"
+    implementation "com.github.bumptech.glide:okhttp3-integration:$rootProject.glide_version"
     kapt "com.github.bumptech.glide:compiler:$rootProject.glide_version"
 
     //ui

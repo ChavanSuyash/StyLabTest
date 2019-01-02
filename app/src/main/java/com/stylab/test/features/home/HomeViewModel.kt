@@ -1,12 +1,16 @@
 package com.stylab.test.features.home
 
+import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.stylab.test.R
 import com.stylab.test.data.login.LoginRepository
 import com.stylab.test.data.login.model.LoggedInUser
 import com.stylab.test.data.list.ListRepository
 import com.stylab.test.data.list.model.ListModel
+import com.stylab.test.features.login.LoginUiModel
+import com.stylab.test.util.Event
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.Job
@@ -17,9 +21,6 @@ class HomeViewModel @Inject constructor(
     loginRepository: LoginRepository
 ) : ViewModel() {
 
-    private val parentJob = Job()
-    private val scope = CoroutineScope(Main + parentJob)
-
     private val _user = MutableLiveData<LoggedInUser>()
     val user : LiveData<LoggedInUser>
         get() = _user
@@ -28,6 +29,11 @@ class HomeViewModel @Inject constructor(
     val list : LiveData<List<ListModel>>
         get() = _list
 
+    private val _uiState = MutableLiveData<HomeUiModel>()
+    val uiState: LiveData<HomeUiModel>
+        get() = _uiState
+
+    var isRefreshing = ObservableBoolean()
 
     init {
         _user.value = loginRepository.user
@@ -37,12 +43,29 @@ class HomeViewModel @Inject constructor(
     private fun loadData(page: Int = 1) = listRepository.loadListData(
         page,
         onSuccess =  {
+            isRefreshing.set(false)
             _list.value = it
+
         },
         onError = {
-            //Emmit error
+            isRefreshing.set(false)
+            emitUiState(
+                showError = Event(R.string.something_is_wrong)
+            )
         }
     )
+
+    fun onRefresh() {
+        isRefreshing.set(true)
+        loadData()
+    }
+
+    private fun emitUiState(
+        showError: Event<Int>? = null
+    ) {
+        val uiModel = HomeUiModel(showError)
+        _uiState.value = uiModel
+    }
 
     override fun onCleared() {
         super.onCleared()
@@ -50,3 +73,7 @@ class HomeViewModel @Inject constructor(
     }
 
 }
+
+class HomeUiModel(
+    val showError : Event<Int>?
+)

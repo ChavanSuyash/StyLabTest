@@ -13,7 +13,7 @@ class SpacesItemDecoration(private val mSpace: Int) : RecyclerView.ItemDecoratio
         outRect.bottom = mSpace
 
         // Add top margin only for the first item to avoid double space between items
-        if (parent.getChildAdapterPosition(view) == 0 || parent.getChildAdapterPosition(view) == 1)
+        if (parent.getChildAdapterPosition(view) == 1)
             outRect.top = mSpace
     }
 }

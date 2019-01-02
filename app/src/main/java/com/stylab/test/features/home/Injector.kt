@@ -13,4 +13,5 @@ fun HomeActivity.inject() {
         .sharedPreferencesModule(SharedPreferencesModule(this, LoginLocalDataSource.LOGIN_PREF))
         .build()
         .inject(this)
+
 }

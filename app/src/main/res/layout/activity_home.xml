@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout
-        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -11,6 +12,7 @@
 
     <LinearLayout
             android:orientation="vertical"
+            android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -23,16 +25,25 @@
                 android:titleTextAppearance="@style/TextAppearance.ToolbarTitle"
                 android:title="@{`Hello, ` + viewModel.user.fullName}"/>
 
-
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/homeList"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:elevation="1dp"
-                android:scrollbarStyle="outsideOverlay"
-                android:scrollbars="vertical"
-                tools:listitem="@layout/grid_list_item"/>
+                app:refreshing="@{viewModel.isRefreshing}"
+                app:onRefreshListener="@{() -> viewModel.onRefresh()}">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/homeList"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clipToPadding="false"
+                    android:elevation="1dp"
+                    android:scrollbarStyle="outsideOverlay"
+                    android:scrollbars="vertical"
+                    android:paddingTop="5dp"
+                    tools:listitem="@layout/grid_list_item"/>
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </LinearLayout>
 

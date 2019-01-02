@@ -1,15 +1,21 @@
 package com.stylab.test.features.home
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.stylab.test.R
 import com.stylab.test.databinding.ActivityHomeBinding
 import android.widget.TextView
+import androidx.annotation.StringRes
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.animation.AnimationUtils
+import com.google.android.material.snackbar.Snackbar
+import com.stylab.test.util.action
+import com.stylab.test.util.animator.SlideInAnimator
 import com.stylab.test.util.animator.SpacesItemDecoration
+import com.stylab.test.util.snack
 import javax.inject.Inject
 
 
@@ -36,10 +42,11 @@ class HomeActivity : AppCompatActivity() {
             animateToolbar()
         }
 
-        listAdapter = HomeListAdapter()
+        listAdapter = HomeListAdapter(this)
         binding.homeList.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
         binding.homeList.adapter = listAdapter
         binding.homeList.addItemDecoration(SpacesItemDecoration(16))
+        binding.homeList.itemAnimator = SlideInAnimator()
 
         subScribeUi()
     }
@@ -62,8 +69,24 @@ class HomeActivity : AppCompatActivity() {
 
     private fun subScribeUi() {
         homeViewModel.list.observe(this, Observer {
-                listAdapter.submitList(it)
+                listAdapter.updateList(it)
             }
         )
+        homeViewModel.uiState.observe( this, Observer {
+                val uiModel = it
+
+                if (uiModel.showError != null && !uiModel.showError.consumed) {
+                    uiModel.showError.consume()?.let { showLoadingFailed(it) }
+                }
+            }
+        )
+    }
+
+    private fun showLoadingFailed(@StringRes errorString : Int) {
+        binding.container.snack(errorString, length = Snackbar.LENGTH_INDEFINITE) {
+            action(R.string.retry) {
+                homeViewModel.onRefresh()
+            }
+        }
     }
 }

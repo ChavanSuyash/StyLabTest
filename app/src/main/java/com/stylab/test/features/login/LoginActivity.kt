@@ -3,6 +3,7 @@ package com.stylab.test.features.login
 import android.content.Intent
 import android.os.Bundle
 import android.transition.TransitionManager
+import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -58,6 +59,7 @@ class LoginActivity : AppCompatActivity(), ActivityNavigation {
     }
 
     private fun showLoginSuccess(@StringRes successString : Int){
+        Toast.makeText(this.applicationContext,successString,Toast.LENGTH_SHORT).show()
         startActivity<HomeActivity>()
         finish()
     }

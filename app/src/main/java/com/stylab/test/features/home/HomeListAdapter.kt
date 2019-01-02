@@ -1,51 +1,56 @@
 package com.stylab.test.features.home
 
-import android.util.Log
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.stylab.test.R
 import com.stylab.test.data.list.model.ListModel
 import com.stylab.test.databinding.GridListItemBinding
 
-class HomeListAdapter : ListAdapter<ListModel, HomeListAdapter.ViewHolder>(HomeListDiffCallback()) {
+class HomeListAdapter(private val context: Context) : RecyclerView.Adapter<HomeListAdapter.ViewHolder>() {
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val itemList = getItem(position)
-        holder.apply {
-            bind(itemList)
-            //itemView.tag = itemList
-        }
+     /**
+     * The list of model for the adapter
+     */
+    private var modelList: List<ListModel> = listOf()
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeListAdapter.ViewHolder {
+        val layoutInflater = LayoutInflater.from(context)
+        val binding: GridListItemBinding = DataBindingUtil.inflate(layoutInflater, R.layout.grid_list_item, parent, false)
+        return ViewHolder(binding)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(GridListItemBinding.inflate(
-            LayoutInflater.from(parent.context), parent, false))
+    override fun getItemCount(): Int {
+        return modelList.size
     }
 
-    class ViewHolder(
-        private val binding: GridListItemBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
+    override fun onBindViewHolder(holder: HomeListAdapter.ViewHolder, position: Int) {
+        holder.bind(modelList[position])
+    }
+
+    /**
+     * Updates the list of git repository of the adapter
+     * @param modelList the new list of git repository of the adapter
+     */
+    fun updateList(modelList: List<ListModel>) {
+        this.modelList = modelList
+        notifyDataSetChanged()
+    }
+
+    /**
+     * The ViewHolder of the adapter
+     * @property binding the DataBinging object for list item
+     */
+    class ViewHolder(private val binding: GridListItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: ListModel) {
             binding.apply {
-                Log.e("Bind","call")
                 listItem = item
                 executePendingBindings()
             }
         }
     }
-}
 
-
-class HomeListDiffCallback : DiffUtil.ItemCallback<ListModel>() {
-
-    override fun areItemsTheSame(oldItem: ListModel, newItem: ListModel): Boolean {
-        return oldItem.id == newItem.id
-    }
-
-    override fun areContentsTheSame(oldItem: ListModel, newItem: ListModel): Boolean {
-        return oldItem == newItem
-    }
 }
