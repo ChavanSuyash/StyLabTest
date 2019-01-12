@@ -40,24 +40,27 @@ class HomeViewModel @Inject constructor(
         loadData()
     }
 
-    private fun loadData(page: Int = 1) = listRepository.loadListData(
-        page,
-        filter = true,
-        onSuccess =  {
-            isRefreshing.set(false)
-            _list.value = it
+    private fun loadData(page: Int = 1) {
+        isRefreshing.set(true)
 
-        },
-        onError = {
-            isRefreshing.set(false)
-            emitUiState(
-                showError = Event(R.string.something_is_wrong)
-            )
-        }
-    )
+        listRepository.loadListData(
+            page,
+            filter = true,
+            onSuccess = {
+                isRefreshing.set(false)
+                _list.value = it
+
+            },
+            onError = {
+                isRefreshing.set(false)
+                emitUiState(
+                    showError = Event(R.string.something_is_wrong)
+                )
+            }
+        )
+    }
 
     fun onRefresh() {
-        isRefreshing.set(true)
         loadData()
     }
 
