@@ -10,6 +10,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory.create
+import java.util.concurrent.TimeUnit
 
 const val BASE_URL = "http://lightbuzz.in:1353"
 
@@ -28,7 +29,13 @@ class CoreDataModule {
 
     @Provides
     fun provideOkHttpClient(): OkHttpClient =
-        OkHttpClient.Builder().addInterceptor(provideLoggingInterceptor()).build()
+        OkHttpClient.Builder()
+            .addInterceptor(provideLoggingInterceptor())
+            .readTimeout(60, TimeUnit.SECONDS)
+            .connectTimeout(60 / 2, TimeUnit.SECONDS)
+            .writeTimeout(60, TimeUnit.SECONDS)
+            .cache(null)
+            .build()
 
     @Provides
     fun provideRetrofit(
