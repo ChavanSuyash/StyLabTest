@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.stylab.test.R
 import com.stylab.test.data.list.model.ListModel
 import com.stylab.test.databinding.GridListItemBinding
+import kotlinx.android.synthetic.main.grid_list_item.view.*
 
 class HomeListAdapter(private val context: Context) : RecyclerView.Adapter<HomeListAdapter.ViewHolder>() {
 
@@ -27,6 +28,8 @@ class HomeListAdapter(private val context: Context) : RecyclerView.Adapter<HomeL
     }
 
     override fun onBindViewHolder(holder: HomeListAdapter.ViewHolder, position: Int) {
+        val aspectRatio = 300 floatDiv 200
+        holder.itemView.image.setAspectRatio(aspectRatio)
         holder.bind(modelList[position])
     }
 
@@ -53,3 +56,6 @@ class HomeListAdapter(private val context: Context) : RecyclerView.Adapter<HomeL
         }
     }
 }
+
+infix fun Int.floatDiv(i: Int): Float = this / i.toFloat()
+

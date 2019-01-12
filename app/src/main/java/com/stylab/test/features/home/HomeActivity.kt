@@ -9,15 +9,12 @@ import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.animation.AnimationUtils
 import com.google.android.material.snackbar.Snackbar
 import com.stylab.test.util.action
 import com.stylab.test.util.animator.SpacesItemDecoration
 import com.stylab.test.util.snack
 import javax.inject.Inject
-import androidx.recyclerview.widget.SimpleItemAnimator
-
 
 
 
